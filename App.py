@@ -13,27 +13,41 @@ st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", l
 st.markdown(
     """
     <style>
-    .title-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
+    body {
+        background-color: #f0f6ff;
     }
-    .title-container h1 {
-        color: #007BFF;
-        margin: 0;
+    .main {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+    }
+    .stButton>button {
+        background-color: #007BFF;
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 10px 24px;
+        border: none;
+    }
+    .stButton>button:hover {
+        background-color: #0056b3;
+        color: white;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Title with image + text (using st.image)
-col1, col2 = st.columns([1,5])
+# Title with image + text (side by side)
+col1, col2 = st.columns([1,6])  # adjust ratio for alignment
 with col1:
-    st.image("medical_codt_prediction image.png", width=70)
+    st.image("medical_codt_prediction image.png", width=90)  # apna logo file ka naam yeh rakho
 with col2:
-    st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
+    st.markdown(
+        "<h1 style='color:#007BFF; font-size: 42px;'>Medical Insurance Prediction</h1>",
+        unsafe_allow_html=True
+    )
 
 # Description
 st.write(
@@ -48,28 +62,4 @@ col1, col2 = st.columns(2)
 with col1:
     age = st.number_input("Age", min_value=18, max_value=100, value=30)
     bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
-    children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
-
-with col2:
-    sex = st.selectbox("Sex", ["male", "female"])
-    smoker = st.selectbox("Smoker", ["yes", "no"])
-    region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
-
-# Data Preprocessing (encoding)
-sex = 1 if sex == "male" else 0
-smoker = 1 if smoker == "yes" else 0
-region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
-region = region_dict[region]
-
-# Prepare features
-features = np.array([[age, bmi, children, sex, smoker, region]])
-
-# USD to INR conversion rate
-USD_TO_INR = 83
-
-# Predict button
-if st.button("Predict Medical Cost"):
-    prediction = model.predict(features)
-    cost_usd = prediction[0]
-    cost_inr = cost_usd * USD_TO_INR
-    st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+    children = st.number_input("Numbe_
