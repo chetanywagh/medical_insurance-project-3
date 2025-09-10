@@ -28,14 +28,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ✅ Load Model with error handling
-@st.cache_resource
+# ✅ Load Model safely (no error message shown)
 def load_model():
     model_path = os.path.join(os.path.dirname(__file__), "medical_cost_model.pkl")
-    try:
+    if os.path.exists(model_path):
         return pickle.load(open(model_path, "rb"))
-    except FileNotFoundError:
-        st.error("❌ Model file not found! Please upload `medical_cost_model.pkl` in the same directory as App.py.")
+    else:
         return None
 
 model = load_model()
@@ -52,19 +50,22 @@ children = st.number_input("Number of Children", min_value=0, max_value=10, step
 smoker = st.selectbox("Smoker", ["Yes", "No"])
 region = st.selectbox("Region", ["southwest", "southeast", "northwest", "northeast"])
 
-# --- Prediction Button ---
-if model is not None and st.button("Predict"):
-    # Encode categorical values
-    sex_val = 1 if sex == "Male" else 0
-    smoker_val = 1 if smoker == "Yes" else 0
-    region_map = {"southwest": 0, "southeast": 1, "northwest": 2, "northeast": 3}
-    region_val = region_map[region]
+# --- Prediction Button (Always at last) ---
+if st.button("🔮 Predict Insurance Cost"):
+    if model is not None:
+        # Encode categorical values
+        sex_val = 1 if sex == "Male" else 0
+        smoker_val = 1 if smoker == "Yes" else 0
+        region_map = {"southwest": 0, "southeast": 1, "northwest": 2, "northeast": 3}
+        region_val = region_map[region]
 
-    # Create input array
-    input_data = np.array([[age, sex_val, bmi, children, smoker_val, region_val]])
+        # Create input array
+        input_data = np.array([[age, sex_val, bmi, children, smoker_val, region_val]])
 
-    # Prediction
-    prediction = model.predict(input_data)
-    st.success(f"✅ Estimated Insurance Cost: ${prediction[0]:.2f}")
+        # Prediction
+        prediction = model.predict(input_data)
+        st.success(f"✅ Estimated Insurance Cost: ${prediction[0]:.2f}")
+    else:
+        st.warning("⚠️ Prediction model not available. Please upload the model file.")
 
 st.markdown('</div>', unsafe_allow_html=True)
