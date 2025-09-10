@@ -40,9 +40,9 @@ st.markdown(
 )
 
 # Image + Title in one row
-col1, col2 = st.columns([1, 4])  # ratio for size adjust
+col1, col2 = st.columns([1, 4])  # adjust ratio for size
 with col1:
-    st.image("fd4800ff-65de-4de8-badb-3143cb023921.png", width=80)  # small image
+    st.image("images/logo.png", width=80)  # make sure logo.png is inside images/ folder
 with col2:
     st.markdown("<h1 style='color:#007BFF; margin-top:15px;'>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
