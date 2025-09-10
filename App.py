@@ -43,11 +43,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Title with GIF
-col1, col2, col3 = st.columns([1, 3, 1])
-with col2:
-    st.image("doc.gif", use_container_width=True)
+# Small image above title
+st.image("doc.gif", width=180)  # small size image
 
+# Title & description
 st.title("Medical Insurance Prediction")
 st.write(
     "This app predicts **medical insurance costs** based on user details. "
