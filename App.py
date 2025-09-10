@@ -57,7 +57,7 @@ st.markdown(
 st.markdown(
     """
     <div class="title-container">
-        <img src="https://github.com/chetanywagh/medical_insurance-project-3/blob/main/medical_codt_prediction%20image.png">
+        <img src="medical_cost_prediction image.png">
         <h1>Medical Insurance Prediction</h1>
     </div>
     """,
