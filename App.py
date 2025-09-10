@@ -62,4 +62,28 @@ col1, col2 = st.columns(2)
 with col1:
     age = st.number_input("Age", min_value=18, max_value=100, value=30)
     bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
-    children = st.number_input("Numbe_
+    children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
+
+with col2:
+    sex = st.selectbox("Sex", ["male", "female"])
+    smoker = st.selectbox("Smoker", ["yes", "no"])
+    region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
+
+# Data Preprocessing (encoding)
+sex = 1 if sex == "male" else 0
+smoker = 1 if smoker == "yes" else 0
+region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
+region = region_dict[region]
+
+# Prepare features
+features = np.array([[age, bmi, children, sex, smoker, region]])
+
+# USD to INR conversion rate
+USD_TO_INR = 83
+
+# Predict button
+if st.button("Predict Medical Cost"):
+    prediction = model.predict(features)
+    cost_usd = prediction[0]
+    cost_inr = cost_usd * USD_TO_INR
+    st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
