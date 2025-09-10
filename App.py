@@ -13,36 +13,11 @@ st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", l
 st.markdown(
     """
     <style>
-    body {
-        background-color: #f0f6ff;
-    }
-    .main {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-    }
-    .stButton>button {
-        background-color: #007BFF;
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-        padding: 10px 24px;
-        border: none;
-    }
-    .stButton>button:hover {
-        background-color: #0056b3;
-        color: white;
-    }
     .title-container {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 15px;
-    }
-    .title-container img {
-        width: 70px;
-        height: 70px;
     }
     .title-container h1 {
         color: #007BFF;
@@ -53,16 +28,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Title with local logo (inside medical_cost_prediction folder)
-st.markdown(
-    """
-    <div class="title-container">
-        <img src="medical_cost_prediction image.png">
-        <h1>Medical Insurance Prediction</h1>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Title with image + text (using st.image)
+col1, col2 = st.columns([1,5])
+with col1:
+    st.image("medical_codt_prediction image.png", width=70)
+with col2:
+    st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
 # Description
 st.write(
