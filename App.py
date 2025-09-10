@@ -34,17 +34,17 @@ st.markdown(
         background-color: #0056b3;
         color: white;
     }
+    h1 {
+        color: #007BFF;
+        text-align: center;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Image + Title in one row
-col1, col2 = st.columns([1, 4])  # adjust ratio for size
-with col1:
-    st.image("images/logo.png", width=80)  # make sure logo.png is inside images/ folder
-with col2:
-    st.markdown("<h1 style='color:#007BFF; margin-top:15px;'>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
+# Title only (no image)
+st.markdown("<h1 style='color:#007BFF;'>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
 # Description
 st.write(
