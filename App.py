@@ -76,7 +76,12 @@ region = region_dict[region]
 # Prepare features
 features = np.array([[age, bmi, children, sex, smoker, region]])
 
+# USD to INR conversion rate
+USD_TO_INR = 83
+
 # Predict button
 if st.button("Predict Medical Cost"):
     prediction = model.predict(features)
-    st.success(f"💰 Predicted Medical Insurance Cost: **${prediction[0]:,.2f}**")
+    cost_usd = prediction[0]
+    cost_inr = cost_usd * USD_TO_INR
+    st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
