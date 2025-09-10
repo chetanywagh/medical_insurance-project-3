@@ -34,17 +34,35 @@ st.markdown(
         background-color: #0056b3;
         color: white;
     }
-    h1 {
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .title-container img {
+        width: 50px;
+        height: 50px;
+    }
+    .title-container h1 {
         color: #007BFF;
-        text-align: center;
+        margin: 0;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Title only (no image)
-st.markdown("<h1 style='color:#007BFF;'>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
+# Title with logo (GitHub raw image link)
+st.markdown(
+    """
+    <div class="title-container">
+        <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/medical_cost_prediction/image.png">
+        <h1>Medical Insurance Prediction</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Description
 st.write(
