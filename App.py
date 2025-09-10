@@ -34,24 +34,40 @@ st.markdown(
         background-color: #0056b3;
         color: white;
     }
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+    .title-container img {
+        width: 70px;
+        height: 70px;
+    }
+    .title-container h1 {
+        color: #007BFF;
+        margin: 0;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Logo + Title in one row
-col1, col2 = st.columns([1, 6])
-
-with col1:
-    st.image("medical_codt_prediction image.png", width=50)  # <-- make sure image.png is in the same folder as App.py
-
-with col2:
-    st.markdown("<h1 style='color:#007BFF; margin-top:10px;'>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
+# Title with local logo (inside medical_cost_prediction folder)
+st.markdown(
+    """
+    <div class="title-container">
+        <img src="https://github.com/chetanywagh/medical_insurance-project-3/blob/main/medical_codt_prediction%20image.png">
+        <h1>Medical Insurance Prediction</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Description
 st.write(
-    "This app predicts **medical insurance costs** based on user details. "
-    "Please fill in the form below and click **Predict**"
+    "This app predicts medical insurance costs based on user details. "
+    "Please fill in the form below and click Predict"
 )
 
 # User inputs in 2-column layout
