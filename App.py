@@ -57,13 +57,12 @@ st.markdown(
 st.markdown(
     """
     <div class="title-container">
-        <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/medical_cost_prediction/image.png">
+        <img src="medical_codt_prediction image.png">
         <h1>Medical Insurance Prediction</h1>
     </div>
     """,
     unsafe_allow_html=True
 )
-
 # Description
 st.write(
     "This app predicts **medical insurance costs** based on user details. "
