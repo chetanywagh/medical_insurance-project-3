@@ -65,4 +65,4 @@ if st.button("Predict"):
     prediction = model.predict(input_data)
     st.success(f"✅ Estimated Insurance Cost: ${prediction[0]:.2f}")
 
-st.markdown('</div>', unsafe_allow_html=Tr
+st.markdown('</div>', unsafe_allow_html=True)
