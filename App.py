@@ -34,20 +34,19 @@ st.markdown(
         background-color: #0056b3;
         color: white;
     }
-    h1 {
-        color: #007BFF;
-        text-align: center;
-    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Small image above title
-st.image("doc.gif", width=180)  # small size image
+# Image + Title in one row
+col1, col2 = st.columns([1, 4])  # ratio for size adjust
+with col1:
+    st.image("fd4800ff-65de-4de8-badb-3143cb023921.png", width=80)  # small image
+with col2:
+    st.markdown("<h1 style='color:#007BFF; margin-top:15px;'>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
-# Title & description
-st.title("Medical Insurance Prediction")
+# Description
 st.write(
     "This app predicts **medical insurance costs** based on user details. "
     "Please fill in the form below and click **Predict**"
