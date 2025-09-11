@@ -59,39 +59,39 @@ with col2:
 st.write("This app predicts medical insurance costs based on user details. Fill in the form below 👇")
 
 # ================= WHOLE FORM IN ONE BOX =================
-with st.container():
-    st.markdown("<div class='input-box'>", unsafe_allow_html=True)
-    st.header("User Information")
+st.markdown("<div class='input-box'>", unsafe_allow_html=True)
 
-    col1, col2 = st.columns(2)
+st.header("User Information")
 
-    with col1:
-        age = st.number_input("Age", min_value=18, max_value=100, value=30)
-        bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
-        children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
+col1, col2 = st.columns(2)
 
-    with col2:
-        sex = st.selectbox("Sex", ["male", "female"])
-        smoker = st.selectbox("Smoker", ["yes", "no"])
-        region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
+with col1:
+    age = st.number_input("Age", min_value=18, max_value=100, value=30)
+    bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
+    children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
 
-    # Button bhi isi box ke andar
-    if st.button("Predict Medical Cost"):
-        # Encoding
-        sex_val = 1 if sex == "male" else 0
-        smoker_val = 1 if smoker == "yes" else 0
-        region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
-        region_val = region_dict[region]
+with col2:
+    sex = st.selectbox("Sex", ["male", "female"])
+    smoker = st.selectbox("Smoker", ["yes", "no"])
+    region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
 
-        # Features
-        features = np.array([[age, bmi, children, sex_val, smoker_val, region_val]])
+# Button bhi isi box ke andar
+if st.button("Predict Medical Cost"):
+    # Encoding
+    sex_val = 1 if sex == "male" else 0
+    smoker_val = 1 if smoker == "yes" else 0
+    region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
+    region_val = region_dict[region]
 
-        # Prediction
-        USD_TO_INR = 83
-        prediction = model.predict(features)
-        cost_usd = prediction[0]
-        cost_inr = cost_usd * USD_TO_INR
-        st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+    # Features
+    features = np.array([[age, bmi, children, sex_val, smoker_val, region_val]])
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    # Prediction
+    USD_TO_INR = 83
+    prediction = model.predict(features)
+    cost_usd = prediction[0]
+    cost_inr = cost_usd * USD_TO_INR
+    st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+
+st.markdown("</div>", unsafe_allow_html=True)
 # ==========================================================
