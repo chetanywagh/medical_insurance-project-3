@@ -139,7 +139,6 @@ if st.button("💰 Predict Medical Cost"):
     prediction = model.predict(features)
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
-
     st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
 
 # About Section
@@ -154,4 +153,5 @@ st.write(
     - 🎨 **UI**: Built with Streamlit, styled with CSS  
     - 💡 **Purpose**: To provide users a tool to predict costs easily  
 
+   
 )
