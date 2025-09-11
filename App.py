@@ -9,21 +9,29 @@ with open("medical_insurance_model.pkl", "rb") as file:
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="centered")
 
-# Custom CSS for Gradient Background + UI Styling
+# Custom CSS
 st.markdown(
     """
     <style>
     /* Background gradient */
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #e6f7ff, #ffffff, #e3f2fd);
+    body {
+        background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
         font-family: 'Segoe UI', sans-serif;
     }
     .main {
-        background: rgba(255,255,255,0.85);
+        background: rgba(255,255,255,0.9);
         padding: 2rem;
         border-radius: 20px;
         box-shadow: 0px 6px 25px rgba(0,0,0,0.15);
         backdrop-filter: blur(6px);
+    }
+    .form-card {
+        border: 2px solid rgba(0,0,0,0.2);   /* Light black border */
+        border-radius: 15px;
+        padding: 25px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        background-color: rgba(255,255,255,0.8);
     }
     .stButton>button {
         background: linear-gradient(90deg, #007BFF, #00C6FF);
@@ -45,17 +53,6 @@ st.markdown(
         color: #007BFF !important;
         margin-bottom: 0.5rem;
     }
-    .result-card {
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 12px;
-        background: #f0f8ff;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    }
     </style>
     """,
     unsafe_allow_html=True
@@ -64,7 +61,7 @@ st.markdown(
 # Header with logo and title
 col1, col2 = st.columns([1,6])
 with col1:
-    st.image("medical_codt_prediction image.png", width=90)  # Apna logo image file ka naam correct rakhna
+    st.image("medical_codt_prediction image.png", width=90)
 with col2:
     st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
@@ -75,9 +72,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Input form
+# User form inside bordered card
 st.markdown("<div class='form-card'>", unsafe_allow_html=True)
-st.header(" User Information :")
+
+st.header(" User Information")
 col1, col2 = st.columns(2)
 
 with col1:
@@ -90,22 +88,21 @@ with col2:
     smoker = st.selectbox("Smoker", ["yes", "no"])
     region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
 
-st.markdown("</div>", unsafe_allow_html=True)
-
-# Data Preprocessing
-sex = 1 if sex == "male" else 0
-smoker = 1 if smoker == "yes" else 0
-region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
-region = region_dict[region]
-
-# Features
-features = np.array([[age, bmi, children, sex, smoker, region]])
-
-# Conversion rate
-USD_TO_INR = 83
-
-# Predict button
+# Predict button inside border
 if st.button(" Predict Medical Cost"):
+    # Data Preprocessing
+    sex = 1 if sex == "male" else 0
+    smoker = 1 if smoker == "yes" else 0
+    region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
+    region = region_dict[region]
+
+    # Features
+    features = np.array([[age, bmi, children, sex, smoker, region]])
+
+    # Conversion rate
+    USD_TO_INR = 83
+
+    # Prediction
     prediction = model.predict(features)
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
@@ -114,3 +111,5 @@ if st.button(" Predict Medical Cost"):
         f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
         unsafe_allow_html=True
     )
+
+st.markdown("</div>", unsafe_allow_html=True)
