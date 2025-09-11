@@ -12,7 +12,7 @@ def conversion(num):
     elif num >= 100000:
         return f"{num/100000:.2f} Lakh"
     else:
-        return str(num)
+        return str(num)
 
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="wide")
@@ -20,10 +20,6 @@ st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", l
 # Background Gradient
 st.markdown("""
     <style>
-    # [data-testid="stAppViewContainer"] {
-    #     background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
-    #     font-family: 'Segoe UI', sans-serif;
-    # }
     .result-card {
         margin-top: 20px;
         padding: 15px;
