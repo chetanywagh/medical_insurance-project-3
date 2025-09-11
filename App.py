@@ -34,6 +34,14 @@ st.markdown(
         background-color: #0056b3;
         color: white;
     }
+    .box-style {
+        border: 2px solid #007BFF;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 20px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 15px rgba(0,123,255,0.2);
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -55,7 +63,9 @@ st.write(
     "Please fill in the form below and click Predict"
 )
 
-# User inputs in 2-column layout
+# ================= USER INFO + PREDICTION IN BOX =================
+st.markdown("<div class='box-style'>", unsafe_allow_html=True)
+
 st.header("User Information")
 col1, col2 = st.columns(2)
 
@@ -87,3 +97,6 @@ if st.button("Predict Medical Cost"):
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
     st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+
+st.markdown("</div>", unsafe_allow_html=True)
+# ================================================================
