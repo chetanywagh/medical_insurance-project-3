@@ -12,10 +12,10 @@ st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", l
 # Background Gradient
 st.markdown("""
     <style>
-    # [data-testid="stAppViewContainer"] {
-    #     background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
-    #     font-family: 'Segoe UI', sans-serif;
-    # }
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
+        font-family: 'Segoe UI', sans-serif;
+    }
     .result-card {
         margin-top: 20px;
         padding: 15px;
