@@ -69,8 +69,8 @@ with col2:
 
 # Short & clear description
 st.write(
-    "**Predict your medical insurance cost instantly!** \n\n"
-    "Predict your expected medical insurance costs by filling in the details below 👇"
+    "        **Predict your medical insurance cost instantly!** \n\n"
+    "          Predict your expected medical insurance costs by filling in the details below 👇"
 )
 
 
