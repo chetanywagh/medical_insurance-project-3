@@ -71,7 +71,7 @@ st.markdown(
 # Header with logo and title
 col1, col2 = st.columns([1,6])
 with col1:
-    st.image("d94b29f0-1545-47e2-aa9f-315bfddebe08.png", width=90)
+    st.image("medical_codt_prediction image.png", width=90)
 with col2:
     st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
