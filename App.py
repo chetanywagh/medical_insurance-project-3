@@ -9,150 +9,58 @@ with open("medical_insurance_model.pkl", "rb") as file:
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="centered")
 
-# Custom CSS
-st.markdown(
-    """
-    <style>
-    /* Background gradient */
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #e6f7ff, #ffffff, #e3f2fd);
-        font-family: 'Segoe UI', sans-serif;
-    }
-    .main {
-        background: rgba(255,255,255,0.85);
-        padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0px 6px 25px rgba(0,0,0,0.15);
-        backdrop-filter: blur(6px);
-    }
-    .stButton>button {
-        background: linear-gradient(90deg, #007BFF, #00C6FF);
-        color: white;
-        font-weight: bold;
-        border-radius: 12px;
-        padding: 14px 30px;
-        font-size: 17px;
-        border: none;
-        transition: 0.3s ease;
-    }
-    .stButton>button:hover {
-        background: linear-gradient(90deg, #0056b3, #0094cc);
-        transform: scale(1.05);
-    }
-    h1 {
-        font-size: 44px !important;
-        font-weight: 800 !important;
-        color: #007BFF !important;
-        margin-bottom: 0.5rem;
-    }
-    .result-card {
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 12px;
-        background: #f0f8ff;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    }
-    /* Navbar CSS */
-    .navbar {
-        background: #007BFF;
-        padding: 14px;
-        border-radius: 12px;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 25px;
-    }
-    .navbar a {
-        text-decoration: none;
-        color: white;
-        font-weight: bold;
-        margin: 0 25px;
-        font-size: 20px;
-    }
-    .navbar a:hover {
-        color: #ffdd57;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Sidebar (Hamburger menu)
+menu = st.sidebar.radio("☰ Navigation", ["🏠 Home", "📊 Prediction", "ℹ️ About"])
 
-# ---------------- NAVBAR -----------------
-st.markdown(
-    """
-    <div class="navbar">
-        <a href="#home">🏠 Home</a>
-        <a href="#prediction">📊 Prediction</a>
-        <a href="#about">ℹ️ About</a>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-# Header with logo and title
-col1, col2 = st.columns([1,6])
-with col1:
-    st.image("medical_codt_prediction image.png", width=90)
-with col2:
-    st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
-
-# ---------------- HOME -----------------
-st.markdown("<h2 id='home'>🏠 Home</h2>", unsafe_allow_html=True)
-st.markdown(
-    "<p style='font-size:18px; color:#333;'>💡 Welcome to the Medical Insurance Predictor App. <br>"
-    "Use this app to get an instant estimate of your medical insurance cost. 👇</p>",
-    unsafe_allow_html=True
-)
-
-# ---------------- PREDICTION -----------------
-st.markdown("<h2 id='prediction'>📊 Prediction</h2>", unsafe_allow_html=True)
-st.markdown("<div class='form-card'>", unsafe_allow_html=True)
-st.header(" User Information :")
-col1, col2 = st.columns(2)
-
-with col1:
-    age = st.number_input("Age", min_value=18, max_value=100, value=30)
-    bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
-    children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
-
-with col2:
-    sex = st.selectbox("Sex", ["male", "female"])
-    smoker = st.selectbox("Smoker", ["yes", "no"])
-    region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# Data Preprocessing
-sex = 1 if sex == "male" else 0
-smoker = 1 if smoker == "yes" else 0
-region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
-region = region_dict[region]
-
-features = np.array([[age, bmi, children, sex, smoker, region]])
-USD_TO_INR = 83
-
-if st.button(" Predict Medical Cost"):
-    prediction = model.predict(features)
-    cost_usd = prediction[0]
-    cost_inr = cost_usd * USD_TO_INR
-
+# Home
+if menu == "🏠 Home":
+    st.title("Medical Insurance Prediction")
     st.markdown(
-        f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
+        "<p style='font-size:18px; color:#333;'>💡 Welcome to the Medical Insurance Predictor App. <br>"
+        "Use this app to get an instant estimate of your medical insurance cost. 👇</p>",
         unsafe_allow_html=True
     )
 
-# ---------------- ABOUT -----------------
-st.markdown("<h2 id='about'>ℹ️ About</h2>", unsafe_allow_html=True)
-st.markdown(
-    """
-    This **Medical Insurance Predictor** helps you estimate your insurance cost
-    based on personal details like age, BMI, smoking habits, and region.  
-    
-    🛠️ **Tech Stack Used**: Python, Streamlit, Machine Learning (Pickle model)  
-    💡 **Goal**: Provide quick and simple cost estimation for users.  
-    """,
-    unsafe_allow_html=True
-)
+# Prediction
+elif menu == "📊 Prediction":
+    st.header(" User Information :")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        age = st.number_input("Age", min_value=18, max_value=100, value=30)
+        bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
+        children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
+
+    with col2:
+        sex = st.selectbox("Sex", ["male", "female"])
+        smoker = st.selectbox("Smoker", ["yes", "no"])
+        region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
+
+    # Data Preprocessing
+    sex = 1 if sex == "male" else 0
+    smoker = 1 if smoker == "yes" else 0
+    region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
+    region = region_dict[region]
+
+    features = np.array([[age, bmi, children, sex, smoker, region]])
+    USD_TO_INR = 83
+
+    if st.button(" Predict Medical Cost"):
+        prediction = model.predict(features)
+        cost_usd = prediction[0]
+        cost_inr = cost_usd * USD_TO_INR
+
+        st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+
+# About
+elif menu == "ℹ️ About":
+    st.subheader("About This App")
+    st.markdown(
+        """
+        This **Medical Insurance Predictor** helps you estimate your insurance cost
+        based on personal details like age, BMI, smoking habits, and region.  
+
+        🛠️ **Tech Stack**: Python, Streamlit, Machine Learning  
+        💡 **Goal**: Provide quick and simple cost estimation for users.  
+        """
+    )
