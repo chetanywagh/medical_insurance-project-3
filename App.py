@@ -6,16 +6,24 @@ import numpy as np
 with open("medical_insurance_model.pkl", "rb") as file:
     model = pickle.load(file)
 
+def conversion(num):
+    if num >= 10000000:
+        return f"{num/10000000:.2f} Crore"
+    elif num >= 100000:
+        return f"{num/100000:.2f} Lakh"
+    else:
+        return str(num)
+
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="wide")
 
 # Background Gradient
 st.markdown("""
     <style>
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
-        font-family: 'Segoe UI', sans-serif;
-    }
+    # [data-testid="stAppViewContainer"] {
+    #     background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
+    #     font-family: 'Segoe UI', sans-serif;
+    # }
     .result-card {
         margin-top: 20px;
         padding: 15px;
@@ -102,9 +110,9 @@ with tab2:
         prediction = model.predict(features)
         cost_usd = prediction[0]
         cost_inr = cost_usd * USD_TO_INR
-        # st.success(f" Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+        pred = conversion(cost_inr)
         st.markdown(
-        f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
+        f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{pred:}</span></div>",
         unsafe_allow_html=True
     )
 
