@@ -103,5 +103,5 @@ It demonstrates:
 
 - 🧠 **ML Model**: Trained on insurance dataset  
 - 🎨 **UI**: Built with Streamlit, styled with CSS  
-- 💡 **Purpose**: To provide users a tool to predict costs easily  
+- 💡 **Purpose**: To provide users a tool to predict costs easily  )
 
