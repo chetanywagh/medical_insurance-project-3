@@ -34,13 +34,12 @@ st.markdown(
         background-color: #0056b3;
         color: white;
     }
-    .box-style {
+    .input-box {
         border: 2px solid #007BFF;
-        border-radius: 12px;
+        border-radius: 10px;
         padding: 20px;
         margin-top: 20px;
         background-color: #ffffff;
-        box-shadow: 0px 4px 15px rgba(0,123,255,0.2);
     }
     </style>
     """,
@@ -48,7 +47,7 @@ st.markdown(
 )
 
 # Title with image + text (side by side)
-col1, col2 = st.columns([1,6])  # adjust ratio for alignment
+col1, col2 = st.columns([1,6])
 with col1:
     st.image("medical_codt_prediction image.png", width=90)  # apna logo file ka naam yeh rakho
 with col2:
@@ -63,10 +62,10 @@ st.write(
     "Please fill in the form below and click Predict"
 )
 
-# ================= USER INFO + PREDICTION IN BOX =================
-st.markdown("<div class='box-style'>", unsafe_allow_html=True)
-
+# ================= USER INFO IN SQUARE BOX =================
+st.markdown("<div class='input-box'>", unsafe_allow_html=True)
 st.header("User Information")
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -78,6 +77,9 @@ with col2:
     sex = st.selectbox("Sex", ["male", "female"])
     smoker = st.selectbox("Smoker", ["yes", "no"])
     region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
+
+st.markdown("</div>", unsafe_allow_html=True)
+# ===========================================================
 
 # Data Preprocessing (encoding)
 sex = 1 if sex == "male" else 0
@@ -97,6 +99,3 @@ if st.button("Predict Medical Cost"):
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
     st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
-
-st.markdown("</div>", unsafe_allow_html=True)
-# ================================================================
