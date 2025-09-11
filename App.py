@@ -48,8 +48,6 @@ tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Prediction", "ℹ️ About Us"])
 # ---- Home Tab ----
 with tab1:
     st.title("🏠 Welcome to Medical Insurance Cost Predictor")
-
-    st.markdown("<strong>Hello world</strong>",unsafe_allow_html=True)
     
     st.write("""
 This project is a **Medical Insurance Cost Prediction Tool** designed to help individuals estimate their insurance premiums quickly and accurately based on personal and health-related information.
