@@ -16,6 +16,17 @@ st.markdown("""
         background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
         font-family: 'Segoe UI', sans-serif;
     }
+    .result-card {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 12px;
+        background: #f0f8ff;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    }
     .stButton>button {
         background: linear-gradient(90deg, #007BFF, #00C6FF);
         color: white;
@@ -78,7 +89,11 @@ with tab2:
         prediction = model.predict(features)
         cost_usd = prediction[0]
         cost_inr = cost_usd * USD_TO_INR
-        st.success(f" Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+        # st.success(f" Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+        st.markdown(
+        f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
+        unsafe_allow_html=True
+    )
 
 # ---- About Tab ----
 with tab3:
@@ -90,6 +105,3 @@ It demonstrates:
 - 🎨 **UI**: Built with Streamlit, styled with CSS  
 - 💡 **Purpose**: To provide users a tool to predict costs easily  
 
-
-
-📌 **Mentor**: Mr. B. Harish""")
