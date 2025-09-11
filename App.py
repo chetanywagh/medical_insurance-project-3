@@ -97,11 +97,27 @@ with tab2:
 
 # ---- About Tab ----
 with tab3:
-    st.header(" About This Project")
-    st.write("""This project is developed as part of a **Machine Learning & Data Science portfolio**.  
-It demonstrates:  
+    st.header("ℹ️ About This Project")
+    st.write("""This project is a **Medical Insurance Cost Predictor** developed using **Machine Learning** techniques.  
 
-- 🧠 **ML Model**: Trained on insurance dataset  
-- 🎨 **UI**: Built with Streamlit, styled with CSS  
-- 💡 **Purpose**: To provide users a tool to predict costs easily  )
+**Purpose of the Project:**  
+- To provide users with an **instant estimate** of medical insurance costs based on personal and health details.  
+- Helps individuals **plan their finances better** by understanding expected premiums.  
+- Facilitates awareness about factors that impact insurance costs like age, BMI, smoking habits, and region.
+
+**Why this Project is Useful:**  
+- Rising healthcare costs make it essential to **budget for insurance in advance**.  
+- Users can **compare estimated costs** and make informed decisions when selecting insurance plans.  
+- Serves as a **portfolio project** demonstrating the application of ML models in real-world scenarios.
+
+**Technology & Tools Used:**  
+- **Python** & **Streamlit** for the web app interface.  
+- **Machine Learning (Regression Models)** to predict costs.  
+- **NumPy** for numerical computations and data preprocessing.  
+- Custom **CSS** styling for professional UI.  
+
+**Impact:**  
+- Provides **quick insights** into medical insurance premiums.  
+- Can be extended for **personalized insurance recommendations** in the future.""" )
+
 
