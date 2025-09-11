@@ -9,18 +9,12 @@ with open("medical_insurance_model.pkl", "rb") as file:
 # App title & Description
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="centered")
 
-# Custom CSS
+# Custom CSS (sirf button ke liye rakha)
 st.markdown(
     """
     <style>
     body {
         background-color: #f0f6ff;
-    }
-    .main {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
     }
     .stButton>button {
         background-color: #007BFF;
@@ -33,13 +27,6 @@ st.markdown(
     .stButton>button:hover {
         background-color: #0056b3;
         color: white;
-    }
-    .input-box {
-        border: 2px solid #007BFF;
-        border-radius: 15px;
-        padding: 30px;
-        margin-top: 20px;
-        background-color: #ffffff;
     }
     </style>
     """,
@@ -58,14 +45,7 @@ with col2:
 
 st.write("This app predicts medical insurance costs based on user details. Fill in the form below 👇")
 
-# ================= WHOLE FORM INSIDE ONE BOX =================
-st.markdown(
-    """
-    <div class="input-box">
-    """,
-    unsafe_allow_html=True
-)
-
+# ================= SIMPLE FORM =================
 st.header("User Information")
 
 col1, col2 = st.columns(2)
@@ -80,7 +60,7 @@ with col2:
     smoker = st.selectbox("Smoker", ["yes", "no"])
     region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
 
-# Button bhi box ke andar hi
+# Predict button
 if st.button("Predict Medical Cost"):
     # Encoding
     sex_val = 1 if sex == "male" else 0
@@ -97,7 +77,3 @@ if st.button("Predict Medical Cost"):
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
     st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
-
-# Close box yahin karo last mein
-st.markdown("</div>", unsafe_allow_html=True)
-# ==============================================================
