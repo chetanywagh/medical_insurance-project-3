@@ -9,7 +9,7 @@ with open("medical_insurance_model.pkl", "rb") as file:
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="centered")
 
-# Custom CSS for Gradient Background + UI Styling
+# Custom CSS
 st.markdown(
     """
     <style>
@@ -56,21 +56,21 @@ st.markdown(
         color: #333;
         box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
     }
-    /* Navbar */
+    /* Navbar CSS */
     .navbar {
+        background: #007BFF;
+        padding: 14px;
+        border-radius: 12px;
         display: flex;
         justify-content: center;
-        background: #007BFF;
-        padding: 12px;
-        border-radius: 12px;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
     .navbar a {
         text-decoration: none;
         color: white;
         font-weight: bold;
-        margin: 0 20px;
-        font-size: 18px;
+        margin: 0 25px;
+        font-size: 20px;
     }
     .navbar a:hover {
         color: #ffdd57;
@@ -80,75 +80,79 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# ---------------- NAVBAR -----------------
+st.markdown(
+    """
+    <div class="navbar">
+        <a href="#home">🏠 Home</a>
+        <a href="#prediction">📊 Prediction</a>
+        <a href="#about">ℹ️ About</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 # Header with logo and title
 col1, col2 = st.columns([1,6])
 with col1:
-    st.image("medical_codt_prediction image.png", width=90)  # Apna logo image file ka naam correct rakhna
+    st.image("medical_codt_prediction image.png", width=90)
 with col2:
     st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
-# Navbar
-selected_tab = st.radio("Navigation", ["🏠 Home", "📊 Prediction", "ℹ️ About"], horizontal=True)
-
 # ---------------- HOME -----------------
-if selected_tab == "🏠 Home":
-    st.markdown(
-        "<p style='font-size:18px; color:#333;'>💡 Welcome to the Medical Insurance Predictor App. <br>"
-        "Use this app to get an instant estimate of your medical insurance cost. 👇</p>",
-        unsafe_allow_html=True
-    )
+st.markdown("<h2 id='home'>🏠 Home</h2>", unsafe_allow_html=True)
+st.markdown(
+    "<p style='font-size:18px; color:#333;'>💡 Welcome to the Medical Insurance Predictor App. <br>"
+    "Use this app to get an instant estimate of your medical insurance cost. 👇</p>",
+    unsafe_allow_html=True
+)
 
 # ---------------- PREDICTION -----------------
-elif selected_tab == "📊 Prediction":
-    st.markdown("<div class='form-card'>", unsafe_allow_html=True)
-    st.header(" User Information :")
-    col1, col2 = st.columns(2)
+st.markdown("<h2 id='prediction'>📊 Prediction</h2>", unsafe_allow_html=True)
+st.markdown("<div class='form-card'>", unsafe_allow_html=True)
+st.header(" User Information :")
+col1, col2 = st.columns(2)
 
-    with col1:
-        age = st.number_input("Age", min_value=18, max_value=100, value=30)
-        bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
-        children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
+with col1:
+    age = st.number_input("Age", min_value=18, max_value=100, value=30)
+    bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
+    children = st.number_input("Number of Children", min_value=0, max_value=10, value=0)
 
-    with col2:
-        sex = st.selectbox("Sex", ["male", "female"])
-        smoker = st.selectbox("Smoker", ["yes", "no"])
-        region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
+with col2:
+    sex = st.selectbox("Sex", ["male", "female"])
+    smoker = st.selectbox("Smoker", ["yes", "no"])
+    region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
 
-    st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("</div>", unsafe_allow_html=True)
 
-    # Data Preprocessing
-    sex = 1 if sex == "male" else 0
-    smoker = 1 if smoker == "yes" else 0
-    region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
-    region = region_dict[region]
+# Data Preprocessing
+sex = 1 if sex == "male" else 0
+smoker = 1 if smoker == "yes" else 0
+region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
+region = region_dict[region]
 
-    # Features
-    features = np.array([[age, bmi, children, sex, smoker, region]])
+features = np.array([[age, bmi, children, sex, smoker, region]])
+USD_TO_INR = 83
 
-    # Conversion rate
-    USD_TO_INR = 83
+if st.button(" Predict Medical Cost"):
+    prediction = model.predict(features)
+    cost_usd = prediction[0]
+    cost_inr = cost_usd * USD_TO_INR
 
-    # Predict button
-    if st.button(" Predict Medical Cost"):
-        prediction = model.predict(features)
-        cost_usd = prediction[0]
-        cost_inr = cost_usd * USD_TO_INR
-
-        st.markdown(
-            f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
-            unsafe_allow_html=True
-        )
-
-# ---------------- ABOUT -----------------
-elif selected_tab == "ℹ️ About":
-    st.subheader("About this App")
     st.markdown(
-        """
-        This **Medical Insurance Predictor** helps you estimate your insurance cost
-        based on personal details like age, BMI, smoking habits, and region.  
-        
-        🛠️ **Tech Stack Used**: Python, Streamlit, Machine Learning (Pickle model)  
-        💡 **Goal**: Provide quick and simple cost estimation for users.  
-        """,
+        f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
         unsafe_allow_html=True
     )
+
+# ---------------- ABOUT -----------------
+st.markdown("<h2 id='about'>ℹ️ About</h2>", unsafe_allow_html=True)
+st.markdown(
+    """
+    This **Medical Insurance Predictor** helps you estimate your insurance cost
+    based on personal details like age, BMI, smoking habits, and region.  
+    
+    🛠️ **Tech Stack Used**: Python, Streamlit, Machine Learning (Pickle model)  
+    💡 **Goal**: Provide quick and simple cost estimation for users.  
+    """,
+    unsafe_allow_html=True
+)
