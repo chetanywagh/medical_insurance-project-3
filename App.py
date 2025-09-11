@@ -6,76 +6,85 @@ import numpy as np
 with open("medical_insurance_model.pkl", "rb") as file:
     model = pickle.load(file)
 
-# App title & Description
+# Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="centered")
 
 # Custom CSS
 st.markdown(
     """
     <style>
+    /* Background gradient */
     body {
-        background-color: #f0f6ff;
+        background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
+        font-family: 'Segoe UI', sans-serif;
     }
     .main {
-        background-color: white;
+        background: rgba(255,255,255,0.85);
         padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-    }
-    .form-card {
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
-        margin-bottom: 20px;
+        border-radius: 20px;
+        box-shadow: 0px 6px 25px rgba(0,0,0,0.15);
+        backdrop-filter: blur(6px);
     }
     .stButton>button {
         background: linear-gradient(90deg, #007BFF, #00C6FF);
         color: white;
         font-weight: bold;
-        border-radius: 10px;
-        padding: 12px 28px;
-        font-size: 16px;
+        border-radius: 12px;
+        padding: 14px 30px;
+        font-size: 17px;
         border: none;
+        transition: 0.3s ease;
     }
     .stButton>button:hover {
         background: linear-gradient(90deg, #0056b3, #0094cc);
-        color: white;
+        transform: scale(1.05);
     }
-  .result-card {
-        background: #e9fdf0;
-        padding: 18px;
+    .form-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+    .result-card {
+        background: #f0fff4;
+        padding: 20px;
         border-left: 6px solid #28a745;
-        border-radius: 10px;
+        border-radius: 12px;
         margin-top: 25px;
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 600;
         color: #155724;
+        text-align: center;
+    }
+    h1 {
+        font-size: 44px !important;
+        font-weight: 800 !important;
+        color: #007BFF !important;
+        margin-bottom: 0.5rem;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Title with image + text (side by side)
-col1, col2 = st.columns([1,6])  # adjust ratio for alignment
+# Header with logo and title
+col1, col2 = st.columns([1,6])
 with col1:
-    st.image("medical_codt_prediction image.png", width=90)  # apna logo file ka naam yeh rakho
+    st.image("d94b29f0-1545-47e2-aa9f-315bfddebe08.png", width=90)
 with col2:
-    st.markdown(
-        "<h1 style='color:#007BFF; font-size: 42px;'>Medical Insurance Prediction</h1>",
-        unsafe_allow_html=True
-    )
+    st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
-# Short & clear description
-st.write(
-    "**Predict your medical insurance cost instantly!** \n\n"
-    "Predict your expected medical insurance costs by filling in the details below 👇"
+# Sub description
+st.markdown(
+    "<p style='font-size:18px; color:#333;'>💡 Get an instant estimate of your medical insurance cost. <br> "
+    "Fill in your details below and see the result instantly 👇</p>",
+    unsafe_allow_html=True
 )
 
-
-# User inputs in 2-column layout
-st.header("User Information : ")
+# Input form
+st.markdown("<div class='form-card'>", unsafe_allow_html=True)
+st.header("📝 User Information")
 col1, col2 = st.columns(2)
 
 with col1:
@@ -88,28 +97,27 @@ with col2:
     smoker = st.selectbox("Smoker", ["yes", "no"])
     region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
 
-# Data Preprocessing (encoding)
+st.markdown("</div>", unsafe_allow_html=True)
+
+# Data Preprocessing
 sex = 1 if sex == "male" else 0
 smoker = 1 if smoker == "yes" else 0
 region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
 region = region_dict[region]
 
-# Prepare features
+# Features
 features = np.array([[age, bmi, children, sex, smoker, region]])
 
-# USD to INR conversion rate
+# Conversion rate
 USD_TO_INR = 83
 
 # Predict button
-if st.button("Predict Medical Cost"):
+if st.button("🔮 Predict Medical Cost"):
     prediction = model.predict(features)
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
-    
-    
+
     st.markdown(
-        f"<div class='result-card'>💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}</div>",
+        f"<div class='result-card'>💰 Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
         unsafe_allow_html=True
     )
-
- 
