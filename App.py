@@ -6,48 +6,54 @@ import numpy as np
 with open("medical_insurance_model.pkl", "rb") as file:
     model = pickle.load(file)
 
+# Conversion function
 def conversion(num):
     if num >= 10000000:
         return f"{num/10000000:.2f} Crore"
     elif num >= 100000:
         return f"{num/100000:.2f} Lakh"
     else:
-        return str(num)
+        return str(num)
 
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="wide")
 
-# Background Gradient
+# Background Gradient + Button + Card CSS
 st.markdown("""
-    <style>
-    .result-card {
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 12px;
-        background: #f0f8ff;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    }
-    .stButton>button {
-        background: linear-gradient(90deg, #007BFF, #00C6FF);
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-        padding: 12px 28px;
-        font-size: 16px;
-        border: none;
-    }
-    .stButton>button:hover {
-        background: linear-gradient(90deg, #0056b3, #0094cc);
-        color: white;
-    </style>
+<style>
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
+    font-family: 'Segoe UI', sans-serif;
+}
+.result-card {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f0f8ff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+.stButton>button {
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 16px;
+    border: none;
+}
+.stButton>button:hover {
+    background: linear-gradient(90deg, #0056b3, #0094cc);
+    color: white;
+}
+</style>
 """, unsafe_allow_html=True)
 
 # ---- Tabs ----
-tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Prediction", "ℹ️ About Us"])
+tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Prediction", "ℹ️ About Project"])
 
 # ---- Home Tab ----
 with tab1:
@@ -76,10 +82,9 @@ This project is a **Medical Insurance Cost Prediction Tool** designed to help in
 Switch to the **Prediction** tab, fill in your details, and see your **predicted medical insurance cost instantly**!
 """)
 
-
 # ---- Prediction Tab ----
 with tab2:
-    st.header(" Prediction - Enter Your Details")
+    st.header("📊 Prediction - Enter Your Details")
 
     col1, col2 = st.columns(2)
 
@@ -102,23 +107,24 @@ with tab2:
     features = np.array([[age, bmi, children, sex, smoker, region]])
     USD_TO_INR = 83
 
-    if st.button(" Predict Medical Cost"):
+    if st.button("💰 Predict Medical Cost"):
         prediction = model.predict(features)
         cost_usd = prediction[0]
         cost_inr = cost_usd * USD_TO_INR
         pred = conversion(cost_inr)
         st.markdown(
-        f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{pred:}</span></div>",
-        unsafe_allow_html=True
-    )
+            f"<div class='result-card'>Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{pred}</span></div>",
+            unsafe_allow_html=True
+        )
 
 # ---- About Tab ----
 with tab3:
     st.header("ℹ️ About This Project")
-    st.write("""This project is a **Medical Insurance Cost Predictor** developed using **Machine Learning** techniques.  
+    st.write("""
+This project is a **Medical Insurance Cost Predictor** developed using **Machine Learning** techniques.
 
 **Purpose of the Project:**  
-- To provide users with an **instant estimate** of medical insurance costs based on personal and health details.  
+- Provide users with an **instant estimate** of medical insurance costs based on personal and health details.  
 - Helps individuals **plan their finances better** by understanding expected premiums.  
 - Facilitates awareness about factors that impact insurance costs like age, BMI, smoking habits, and region.
 
@@ -131,10 +137,9 @@ with tab3:
 - **Python** & **Streamlit** for the web app interface.  
 - **Machine Learning (Regression Models)** to predict costs.  
 - **NumPy** for numerical computations and data preprocessing.  
-- Custom **CSS** styling for professional UI.  
+- Custom **CSS** styling for professional UI.
 
 **Impact:**  
 - Provides **quick insights** into medical insurance premiums.  
-- Can be extended for **personalized insurance recommendations** in the future.""" )
-
-
+- Can be extended for **personalized insurance recommendations** in the future.
+""")
