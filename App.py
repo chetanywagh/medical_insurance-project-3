@@ -35,6 +35,16 @@ st.markdown(
         background: linear-gradient(90deg, #0056b3, #0094cc);
         color: white;
     }
+  .result-card {
+        background: #e9fdf0;
+        padding: 18px;
+        border-left: 6px solid #28a745;
+        border-radius: 10px;
+        margin-top: 25px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #155724;
+    }
     </style>
     """,
     unsafe_allow_html=True
