@@ -67,11 +67,6 @@ with col2:
         unsafe_allow_html=True
     )
 
-# Description
-st.write(
-    "Predict your expected medical insurance costs by filling in the details below 👇"
-)
-
 # Short & clear description
 st.write(
     "**Predict your medical insurance cost instantly!** \n\n"
