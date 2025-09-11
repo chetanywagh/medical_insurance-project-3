@@ -72,6 +72,13 @@ st.write(
     "Predict your expected medical insurance costs by filling in the details below 👇"
 )
 
+# Short & clear description
+st.write(
+    "**Predict your medical insurance cost instantly!** \n\n"
+    "Predict your expected medical insurance costs by filling in the details below 👇"
+)
+
+
 # User inputs in 2-column layout
 st.header("User Information")
 col1, col2 = st.columns(2)
