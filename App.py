@@ -9,13 +9,13 @@ with open("medical_insurance_model.pkl", "rb") as file:
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="centered")
 
-# Custom CSS
+# Custom CSS for Gradient Background + UI Styling
 st.markdown(
     """
     <style>
     /* Background gradient */
-    body {
-        background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #e6f7ff, #ffffff, #e3f2fd);
         font-family: 'Segoe UI', sans-serif;
     }
     .main {
@@ -45,6 +45,17 @@ st.markdown(
         color: #007BFF !important;
         margin-bottom: 0.5rem;
     }
+    .result-card {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 12px;
+        background: #f0f8ff;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -53,7 +64,7 @@ st.markdown(
 # Header with logo and title
 col1, col2 = st.columns([1,6])
 with col1:
-    st.image("medical_codt_prediction image.png", width=90)
+    st.image("medical_codt_prediction image.png", width=90)  # Apna logo image file ka naam correct rakhna
 with col2:
     st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
@@ -66,7 +77,7 @@ st.markdown(
 
 # Input form
 st.markdown("<div class='form-card'>", unsafe_allow_html=True)
-st.header(" User Information")
+st.header(" User Information :")
 col1, col2 = st.columns(2)
 
 with col1:
