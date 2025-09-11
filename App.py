@@ -16,6 +16,18 @@ st.markdown("""
         background: linear-gradient(135deg, #e0f7fa, #ffffff, #e3f2fd);
         font-family: 'Segoe UI', sans-serif;
     }
+    .stButton>button {
+        background: linear-gradient(90deg, #007BFF, #00C6FF);
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 12px 28px;
+        font-size: 16px;
+        border: none;
+    }
+    .stButton>button:hover {
+        background: linear-gradient(90deg, #0056b3, #0094cc);
+        color: white;
     </style>
 """, unsafe_allow_html=True)
 
@@ -28,18 +40,18 @@ with tab1:
     st.write("""This project helps you **predict medical insurance costs instantly** based on your health
 and lifestyle factors.
 
-✅ **What this app does:**  
+ **What this app does:**  
 - Estimates medical insurance premium using ML model  
 - Considers Age, BMI, Smoking habits, Region, etc.  
 - Gives results in **INR (₹)** for better understanding  
 
-🚀 **Why this project?**  
+ **Why this project?**  
 Medical costs are rising rapidly. This tool helps individuals plan their finances better by 
 giving them an **instant estimate** of expected insurance costs.""")
 
 # ---- Prediction Tab ----
 with tab2:
-    st.header("📊 Prediction - Enter Your Details")
+    st.header(" Prediction - Enter Your Details")
 
     col1, col2 = st.columns(2)
 
@@ -62,15 +74,15 @@ with tab2:
     features = np.array([[age, bmi, children, sex, smoker, region]])
     USD_TO_INR = 83
 
-    if st.button("💰 Predict Medical Cost"):
+    if st.button(" Predict Medical Cost"):
         prediction = model.predict(features)
         cost_usd = prediction[0]
         cost_inr = cost_usd * USD_TO_INR
-        st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+        st.success(f" Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
 
 # ---- About Tab ----
 with tab3:
-    st.header("ℹ️ About This Project")
+    st.header(" About This Project")
     st.write("""This project is developed as part of a **Machine Learning & Data Science portfolio**.  
 It demonstrates:  
 
@@ -78,12 +90,6 @@ It demonstrates:
 - 🎨 **UI**: Built with Streamlit, styled with CSS  
 - 💡 **Purpose**: To provide users a tool to predict costs easily  
 
-👨‍💻 **Team Members**:  
-- Chetan Wagh  
-- Shivani  
-- Goutham  
-- Manoj  
-- Sahil  
-- Akhil  
+
 
 📌 **Mentor**: Mr. B. Harish""")
