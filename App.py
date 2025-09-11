@@ -58,8 +58,13 @@ with col2:
 
 st.write("This app predicts medical insurance costs based on user details. Fill in the form below 👇")
 
-# ================= WHOLE FORM IN ONE BOX =================
-st.markdown("<div class='input-box'>", unsafe_allow_html=True)
+# ================= WHOLE FORM INSIDE ONE BOX =================
+st.markdown(
+    """
+    <div class="input-box">
+    """,
+    unsafe_allow_html=True
+)
 
 st.header("User Information")
 
@@ -75,7 +80,7 @@ with col2:
     smoker = st.selectbox("Smoker", ["yes", "no"])
     region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
 
-# Button bhi isi box ke andar
+# Button bhi box ke andar hi
 if st.button("Predict Medical Cost"):
     # Encoding
     sex_val = 1 if sex == "male" else 0
@@ -93,5 +98,6 @@ if st.button("Predict Medical Cost"):
     cost_inr = cost_usd * USD_TO_INR
     st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
 
+# Close box yahin karo last mein
 st.markdown("</div>", unsafe_allow_html=True)
-# ==========================================================
+# ==============================================================
