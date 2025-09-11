@@ -39,13 +39,13 @@ st.markdown(
         background: linear-gradient(90deg, #0056b3, #0094cc);
         transform: scale(1.05);
     }
-    .form-card {
-        background: #ffffff;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
-        margin-bottom: 20px;
-    }
+    # .form-card {
+    #     background: #ffffff;
+    #     padding: 20px;
+    #     border-radius: 15px;
+    #     box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+    #     margin-bottom: 20px;
+    # }
     # .result-card {
     #     background: #f0fff4;
     #     padding: 20px;
