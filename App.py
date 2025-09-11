@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
 import numpy as np
-import base64
 
 # Load the trained model
 with open("medical_insurance_model.pkl", "rb") as file:
@@ -10,68 +9,62 @@ with open("medical_insurance_model.pkl", "rb") as file:
 # Page Config
 st.set_page_config(page_title="Medical Insurance Predictor", page_icon="💙", layout="centered")
 
-# Function to add background image
-def add_bg_from_local(image_file):
-    with open(image_file, "rb") as file:
-        encoded = base64.b64encode(file.read()).decode()
-    st.markdown(
-        f"""
-        <style>
-        [data-testid="stAppViewContainer"] {{
-            background-image: url("data:image/png;base64,{encoded}");
-            background-size: cover;
-            background-position: center;
-        }}
-        .main {{
-            background: rgba(255,255,255,0.85);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0px 6px 25px rgba(0,0,0,0.15);
-            backdrop-filter: blur(6px);
-        }}
-        .stButton>button {{
-            background: linear-gradient(90deg, #007BFF, #00C6FF);
-            color: white;
-            font-weight: bold;
-            border-radius: 12px;
-            padding: 14px 30px;
-            font-size: 17px;
-            border: none;
-            transition: 0.3s ease;
-        }}
-        .stButton>button:hover {{
-            background: linear-gradient(90deg, #0056b3, #0094cc);
-            transform: scale(1.05);
-        }}
-        h1 {{
-            font-size: 44px !important;
-            font-weight: 800 !important;
-            color: #007BFF !important;
-            margin-bottom: 0.5rem;
-        }}
-        .result-card {{
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            background: #f0f8ff;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-# Call function with your image file
-add_bg_from_local("01a92b30-6c3c-4508-8c6b-4bb0f610eada.png")
+# Custom CSS for Gradient Background + UI Styling
+st.markdown(
+    """
+    <style>
+    /* Background gradient */
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #e6f7ff, #ffffff, #e3f2fd);
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .main {
+        background: rgba(255,255,255,0.85);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0px 6px 25px rgba(0,0,0,0.15);
+        backdrop-filter: blur(6px);
+    }
+    .stButton>button {
+        background: linear-gradient(90deg, #007BFF, #00C6FF);
+        color: white;
+        font-weight: bold;
+        border-radius: 12px;
+        padding: 14px 30px;
+        font-size: 17px;
+        border: none;
+        transition: 0.3s ease;
+    }
+    .stButton>button:hover {
+        background: linear-gradient(90deg, #0056b3, #0094cc);
+        transform: scale(1.05);
+    }
+    h1 {
+        font-size: 44px !important;
+        font-weight: 800 !important;
+        color: #007BFF !important;
+        margin-bottom: 0.5rem;
+    }
+    .result-card {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 12px;
+        background: #f0f8ff;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Header with logo and title
 col1, col2 = st.columns([1,6])
 with col1:
-    st.image("medical_codt_prediction image.png", width=90)  # Apna logo file yaha rakho
+    st.image("medical_codt_prediction image.png", width=90)  # Apna logo image file ka naam correct rakhna
 with col2:
     st.markdown("<h1>Medical Insurance Prediction</h1>", unsafe_allow_html=True)
 
