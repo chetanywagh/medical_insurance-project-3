@@ -74,7 +74,7 @@ st.markdown("<p class='subtitle'>Predict your expected medical insurance costs b
 # Form Card
 with st.container():
     st.markdown("<div class='form-card'>", unsafe_allow_html=True)
-    st.subheader("User Information")  # 🚀 Emoji/Logo hata diya
+    st.subheader("User Information")  # ✅ emoji removed
 
     col1, col2 = st.columns(2)
 
@@ -92,22 +92,18 @@ with st.container():
 
 # Predict Button
 if st.button("Predict Medical Cost"):
-    # Encoding
     sex_val = 1 if sex == "male" else 0
     smoker_val = 1 if smoker == "yes" else 0
     region_dict = {"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3}
     region_val = region_dict[region]
 
-    # Features
     features = np.array([[age, bmi, children, sex_val, smoker_val, region_val]])
 
-    # Prediction
     USD_TO_INR = 83
     prediction = model.predict(features)
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
 
-    # Result Card
     st.markdown(
         f"<div class='result-card'>💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}</div>",
         unsafe_allow_html=True
