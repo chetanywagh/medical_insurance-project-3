@@ -47,18 +47,31 @@ tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Prediction", "ℹ️ About Us"])
 
 # ---- Home Tab ----
 with tab1:
-    st.title("🏠 Welcome to Medical Insurance Predictor")
-    st.write("""This project helps you **predict medical insurance costs instantly** based on your health
-and lifestyle factors.
+    st.title("🏠 Welcome to Medical Insurance Cost Predictor")
+    
+    st.write("""
+This project is a **Medical Insurance Cost Prediction Tool** designed to help individuals estimate their insurance premiums quickly and accurately based on personal and health-related information.
 
- **What this app does:**  
-- Estimates medical insurance premium using ML model  
-- Considers Age, BMI, Smoking habits, Region, etc.  
-- Gives results in **INR (₹)** for better understanding  
+**Business Need / Problem:**  
+- Healthcare and insurance costs are rising rapidly.  
+- Individuals often struggle to **understand how factors like age, BMI, lifestyle, and region affect insurance premiums**.  
+- There is a need for a tool that provides **instant, reliable estimates** to aid in financial planning.
 
- **Why this project?**  
-Medical costs are rising rapidly. This tool helps individuals plan their finances better by 
-giving them an **instant estimate** of expected insurance costs.""")
+**Key Features of This App:**  
+- **Predict Medical Insurance Costs** using a trained Machine Learning model.  
+- Takes inputs like **age, BMI, number of children, sex, smoking habits, and region**.  
+- Displays results in **INR (₹)** for better clarity.  
+- Clean, interactive UI built with **Streamlit** for ease of use.
+
+**Value to Users:**  
+- Helps individuals **plan finances and choose insurance plans wisely**.  
+- Provides **quick insights** into factors affecting insurance costs.  
+- Can serve as a foundation for more **personalized insurance advisory tools** in the future.
+
+🚀 **Get Started:**  
+Switch to the **Prediction** tab, fill in your details, and see your **predicted medical insurance cost instantly**!
+""")
+
 
 # ---- Prediction Tab ----
 with tab2:
