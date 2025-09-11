@@ -46,17 +46,17 @@ st.markdown(
         box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
         margin-bottom: 20px;
     }
-    .result-card {
-        background: #f0fff4;
-        padding: 20px;
-        border-left: 6px solid #28a745;
-        border-radius: 12px;
-        margin-top: 25px;
-        font-size: 22px;
-        font-weight: 600;
-        color: #155724;
-        text-align: center;
-    }
+    # .result-card {
+    #     background: #f0fff4;
+    #     padding: 20px;
+    #     border-left: 6px solid #28a745;
+    #     border-radius: 12px;
+    #     margin-top: 25px;
+    #     font-size: 22px;
+    #     font-weight: 600;
+    #     color: #155724;
+    #     text-align: center;
+    # }
     h1 {
         font-size: 44px !important;
         font-weight: 800 !important;
@@ -84,7 +84,7 @@ st.markdown(
 
 # Input form
 st.markdown("<div class='form-card'>", unsafe_allow_html=True)
-st.header("📝 User Information")
+st.header(" User Information")
 col1, col2 = st.columns(2)
 
 with col1:
@@ -112,12 +112,12 @@ features = np.array([[age, bmi, children, sex, smoker, region]])
 USD_TO_INR = 83
 
 # Predict button
-if st.button("🔮 Predict Medical Cost"):
+if st.button(" Predict Medical Cost"):
     prediction = model.predict(features)
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
 
     st.markdown(
-        f"<div class='result-card'>💰 Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
+        f"<div class='result-card'> Predicted Medical Insurance Cost: <br><span style='font-size:26px;'>₹{cost_inr:,.2f}</span></div>",
         unsafe_allow_html=True
     )
