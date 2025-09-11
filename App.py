@@ -69,8 +69,7 @@ with col2:
 
 # Description
 st.write(
-    "This app predicts medical insurance costs based on user details. "
-    "Please fill in the form below and click Predict"
+    "Predict your expected medical insurance costs by filling in the details below 👇"
 )
 
 # User inputs in 2-column layout
