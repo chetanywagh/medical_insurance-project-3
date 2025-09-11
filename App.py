@@ -74,7 +74,7 @@ st.markdown("<p class='subtitle'>Predict your expected medical insurance costs b
 # Form Card
 with st.container():
     st.markdown("<div class='form-card'>", unsafe_allow_html=True)
-    st.subheader("📝 User Information")
+    st.subheader("User Information")  # 🚀 Emoji/Logo hata diya
 
     col1, col2 = st.columns(2)
 
