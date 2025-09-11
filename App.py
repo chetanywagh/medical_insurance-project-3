@@ -104,4 +104,11 @@ if st.button("Predict Medical Cost"):
     prediction = model.predict(features)
     cost_usd = prediction[0]
     cost_inr = cost_usd * USD_TO_INR
-    st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+    # st.success(f"💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}")
+    
+    st.markdown(
+        f"<div class='result-card'>💰 Predicted Medical Insurance Cost: ₹{cost_inr:,.2f}</div>",
+        unsafe_allow_html=True
+    )
+
+ 
