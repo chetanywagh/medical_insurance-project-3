@@ -22,6 +22,13 @@ st.markdown(
         border-radius: 15px;
         box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
     }
+    .form-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
     .stButton>button {
         background: linear-gradient(90deg, #007BFF, #00C6FF);
         color: white;
