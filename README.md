@@ -37,13 +37,6 @@ Libraries:
 3) Predicted insurance cost is displayed in Indian Rupees (₹).
 
 
-Project Structure
-medical-insurance-prediction/
-│── App.py                        # Streamlit app
-│── medical_insurance_model.pkl    # Trained ML model
-│── dataset.csv                    # Dataset (if included)
-│── requirements.txt               # Dependencies
-│── README.md                      # Documentation
 
 📊 Model Training
 1) Preprocessing: Encoding categorical columns (sex, smoker, region).
